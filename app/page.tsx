@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Instagram, Youtube, Play, Mail, MapPin, ArrowRight, ArrowUpRight,
   Mic2, Calendar, Users, Sparkles, Music, Radio, Trophy, Star,
-  ShoppingBag, Headphones, Menu, X
+  ShoppingBag, Headphones, Menu, X, Crown, Send, Handshake, UserPlus
 } from 'lucide-react'
 import Image from 'next/image'
 
@@ -60,6 +60,37 @@ const artists = [
 ]
 
 // =============================================
+// ARTIST OF THE MONTH DATA
+// =============================================
+const artistsOfTheMonth = [
+  {
+    name: 'Compliments',
+    month: 'March 2026',
+    bio: 'March 2026\'s spotlight artist bringing heat to the scene. Dark vibes, raw energy, and a sound that cuts through the noise.',
+    instagram: 'https://instagram.com/compliments',
+    image: '/compliments.jpg',
+    current: true
+  },
+  {
+    name: 'Carson Janic',
+    month: 'February 2026',
+    bio: 'February 2026\'s featured artist bringing authentic country vibes to the TSS platform. Soulful vocals, guitar-driven storytelling, and a presence that commands the stage.',
+    instagram: 'https://instagram.com/carsonjanic',
+    image: '/carson-janic.jpg',
+    current: false,
+    genre: 'Country'
+  },
+  {
+    name: 'KSLIME',
+    month: 'January 2026',
+    bio: 'January 2026\'s spotlight artist bringing that authentic sound straight from Windsor. Raw talent, real stories, undeniable energy.',
+    instagram: 'https://www.instagram.com/kslime.rbg/',
+    image: '/kslime.jpg',
+    current: false
+  },
+]
+
+// =============================================
 // NAVIGATION
 // =============================================
 function Nav() {
@@ -84,8 +115,8 @@ function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="font-cursive text-xl md:text-2xl text-slate-800 italic">
-          The Second Spliff
+        <a href="#" className="flex items-center">
+          <span className="font-cursive text-2xl md:text-3xl text-slate-800">The Second Spliff</span>
         </a>
 
         <div className="hidden md:flex items-center gap-2">
@@ -217,14 +248,14 @@ function Hero() {
               className="absolute top-0 right-0 w-72 profile-card float shadow-2xl"
             >
               <div className="relative h-48 rounded-xl overflow-hidden mb-4">
-                <Image src="/kslime.jpg" alt="KSLIME" fill className="object-cover object-top" />
+                <Image src="/compliments.jpg" alt="Compliments" fill className="object-cover object-center" />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-medium">
                   $Featured
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-bold text-lg">KSLIME</h3>
+                  <h3 className="font-bold text-lg">Compliments</h3>
                   <p className="text-sm text-slate-500">Artist of the Month</p>
                 </div>
                 <div className="hover-arrow">
@@ -349,9 +380,9 @@ function Categories() {
 // =============================================
 function HowItWorks() {
   const steps = [
-    { num: '01', title: 'Discover Artists', desc: 'Watch our podcast episodes featuring local talent from Windsor and beyond.' },
-    { num: '02', title: 'Join the Community', desc: 'Follow us on Instagram and YouTube to stay updated on new drops and events.' },
-    { num: '03', title: 'Pull Up to Events', desc: 'Come through to our live events, meet the artists, and be part of the movement.' },
+    { num: '01', title: 'Discover Artists', highlight: 'and Creatives', desc: 'Watch our podcast episodes featuring local talent from Windsor and beyond.' },
+    { num: '02', title: 'Join', highlight: 'the Community', desc: 'Follow us on Instagram and YouTube to stay updated on new drops and events.' },
+    { num: '03', title: 'Pull Up', highlight: 'to Events', desc: 'Come through to our live events, meet the artists, and be part of the movement.' },
   ]
 
   return (
@@ -387,7 +418,7 @@ function HowItWorks() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold mb-1">
-                    {step.title.split(' ')[0]} <span className="text-green-400">{step.title.split(' ').slice(1).join(' ')}</span>
+                    {step.title} <span className="text-green-400">{step.highlight}</span>
                   </h3>
                   <p className="text-slate-400 text-sm">{step.desc}</p>
                 </div>
@@ -493,14 +524,8 @@ function ArtistsRoster() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 
-            className="text-5xl md:text-6xl font-marker mb-4"
-            style={{ 
-              color: '#4ade80',
-              textShadow: '0 0 60px rgba(74, 222, 128, 0.6), 0 0 120px rgba(74, 222, 128, 0.3)'
-            }}
-          >
-            Artists
+          <h2 className="text-4xl md:text-5xl font-serif mb-4">
+            <span className="text-gradient-sage">Artists</span>
           </h2>
           <p className="text-slate-400 tracking-widest uppercase text-sm">
             The Roster — Click to enter their world
@@ -518,7 +543,6 @@ function ArtistsRoster() {
               onClick={() => setSelectedArtist(artist)}
               className="relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-green-500 transition-all"
             >
-              {/* Artist Photo */}
               <Image
                 src={artist.image}
                 alt={artist.name}
@@ -526,7 +550,6 @@ function ArtistsRoster() {
                 className="object-cover"
               />
               
-              {/* Gradient Overlay */}
               <div 
                 className="absolute inset-0"
                 style={{ 
@@ -534,7 +557,6 @@ function ArtistsRoster() {
                 }}
               />
               
-              {/* Artist info */}
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 
                   className="text-2xl font-marker mb-1"
@@ -547,7 +569,6 @@ function ArtistsRoster() {
                 </p>
               </div>
 
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
                 <div 
                   className="w-14 h-14 rounded-full flex items-center justify-center"
@@ -564,7 +585,6 @@ function ArtistsRoster() {
         </div>
       </div>
 
-      {/* Artist Modal */}
       <AnimatePresence>
         {selectedArtist && (
           <motion.div
@@ -660,69 +680,131 @@ function ArtistsRoster() {
 // ARTIST OF THE MONTH
 // =============================================
 function ArtistOfMonth() {
+  const currentArtist = artistsOfTheMonth.find(a => a.current)
+  const pastArtists = artistsOfTheMonth.filter(a => !a.current)
+
   return (
     <section className="py-24">
       <div className="max-w-6xl mx-auto px-6">
+        {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card p-8 md:p-12 relative overflow-hidden"
+          className="text-center mb-12"
         >
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-200/30 to-orange-200/20 rounded-full blur-3xl" />
-
-          <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="badge badge-gold mb-6">
-                <Trophy size={14} />
-                Artist of the Month
-              </div>
-              <h2 className="text-4xl md:text-5xl font-serif mb-4">KSLIME</h2>
-              <p className="text-slate-500 mb-6">
-                January 2026&apos;s spotlight artist bringing that authentic sound 
-                straight from Windsor. Raw talent, real stories, undeniable energy.
-              </p>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="flex items-center gap-2">
-                  <Star size={16} className="text-amber-500" fill="currentColor" />
-                  <span className="text-sm font-medium">Featured Artist</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Radio size={16} className="text-green-500" />
-                  <span className="text-sm font-medium">On Rotation</span>
-                </div>
-              </div>
-              <a
-                href="https://www.instagram.com/kslime.rbg/"
-                target="_blank"
-                className="btn-primary"
-                style={{ background: '#fbbf24' }}
-              >
-                <Instagram size={18} />
-                Follow KSLIME
-              </a>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square max-w-sm mx-auto rounded-3xl overflow-hidden shadow-2xl glow-gold">
-                <Image
-                  src="/kslime.jpg"
-                  alt="KSLIME"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </motion.div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-serif mb-4">
+            Artist of the <span className="text-gradient-gold">Month</span>
+          </h2>
+          <p className="text-slate-500 max-w-lg mx-auto">
+            Spotlighting the talent that&apos;s pushing the culture forward.
+          </p>
         </motion.div>
 
-        <p className="text-center text-slate-400 text-sm mt-6">
+        {/* Current Artist */}
+        {currentArtist && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card p-8 md:p-12 relative overflow-hidden mb-8"
+          >
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-200/30 to-orange-200/20 rounded-full blur-3xl" />
+
+            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="badge badge-gold mb-6">
+                  <Crown size={14} />
+                  Current • {currentArtist.month}
+                </div>
+                <h3 className="text-4xl md:text-5xl font-serif mb-4">{currentArtist.name}</h3>
+                <p className="text-slate-500 mb-6">
+                  {currentArtist.bio}
+                </p>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="flex items-center gap-2">
+                    <Star size={16} className="text-amber-500" fill="currentColor" />
+                    <span className="text-sm font-medium">Featured Artist</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Radio size={16} className="text-green-500" />
+                    <span className="text-sm font-medium">On Rotation</span>
+                  </div>
+                </div>
+                <a
+                  href={currentArtist.instagram}
+                  target="_blank"
+                  className="btn-primary"
+                  style={{ background: '#fbbf24' }}
+                >
+                  <Instagram size={18} />
+                  Follow {currentArtist.name}
+                </a>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="aspect-square max-w-sm mx-auto rounded-3xl overflow-hidden shadow-2xl glow-gold">
+                  <Image
+                    src={currentArtist.image}
+                    alt={currentArtist.name}
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Past Artists */}
+        {pastArtists.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-lg font-semibold text-slate-600 mb-4">Past Artists of the Month</h4>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {pastArtists.map((artist) => (
+                <div key={artist.name} className="glass-card p-4 flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                    <Image
+                      src={artist.image}
+                      alt={artist.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h5 className="font-bold truncate">{artist.name}</h5>
+                    <p className="text-sm text-slate-500">{artist.month}</p>
+                    {'genre' in artist && artist.genre && (
+                      <span className="inline-block mt-1 px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">
+                        {artist.genre}
+                      </span>
+                    )}
+                  </div>
+                  <a
+                    href={artist.instagram}
+                    target="_blank"
+                    className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-amber-100 transition-colors"
+                  >
+                    <Instagram size={14} className="text-slate-600" />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        <p className="text-center text-slate-400 text-sm mt-8">
           Want to be featured? Tag <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="text-green-600 font-medium">@thesecondspliff</a> on Instagram
         </p>
       </div>
@@ -734,63 +816,124 @@ function ArtistOfMonth() {
 // EVENTS
 // =============================================
 function Events() {
+  const events = [
+    {
+      name: 'Chaos at The Cherry',
+      date: 'April 3rd, 2026',
+      description: 'Come find us at our booth — live performances by some of our locals. Pull up, show love, be part of the movement.',
+      image: null,
+      upcoming: true
+    },
+    {
+      name: 'Ashes to Anthems',
+      date: 'Date TBA',
+      description: 'An evening celebrating raw talent and authentic artistry. Stay tuned for details.',
+      image: '/ashes-to-anthems.jpg',
+      upcoming: true
+    }
+  ]
+
   return (
     <section id="events" className="py-24">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card p-8 md:p-16 text-center relative overflow-hidden"
+          className="text-center mb-12"
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-green-200/40 to-emerald-100/30 rounded-full blur-3xl" />
-
-          <div className="relative z-10">
-            <div className="badge mb-6 mx-auto w-fit">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              Live Event
-            </div>
-
-            <h2 className="text-4xl md:text-6xl font-serif mb-4">
-              Chaos at <span className="text-gradient-gold">The Cherry</span>
-            </h2>
-
-            <p className="text-2xl md:text-3xl font-serif text-slate-600 mb-6">
-              April 3rd, 2026
-            </p>
-
-            <p className="text-slate-500 mb-8 max-w-lg mx-auto">
-              Come find us at our booth — live performances by some of our locals. 
-              Pull up, show love, be part of the movement.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-6 mb-10">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
-                <span className="text-xl">🎤</span>
-                <span className="text-sm font-medium">Live Sets</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
-                <span className="text-xl">🎪</span>
-                <span className="text-sm font-medium">TSS Booth</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
-                <span className="text-xl">🔥</span>
-                <span className="text-sm font-medium">Local Artists</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="btn-primary">
-                <Calendar size={18} />
-                Save the Date
-              </a>
-              <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="btn-outline">
-                <Instagram size={18} />
-                Event Details
-              </a>
-            </div>
-          </div>
+          <h2 className="text-4xl md:text-5xl font-serif mb-4">
+            Upcoming <span className="text-gradient-sage">Events</span>
+          </h2>
+          <p className="text-slate-500 max-w-lg mx-auto">
+            Live shows, performances, and experiences. Pull up and be part of the movement.
+          </p>
         </motion.div>
+
+        <div className="space-y-8">
+          {events.map((event, i) => (
+            <motion.div
+              key={event.name}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-card p-8 md:p-12 relative overflow-hidden"
+            >
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-green-200/40 to-emerald-100/30 rounded-full blur-3xl" />
+
+              <div className={`relative z-10 ${event.image ? 'grid md:grid-cols-2 gap-8 items-center' : 'text-center'}`}>
+                <div className={event.image ? '' : 'max-w-2xl mx-auto'}>
+                  <div className="badge mb-6 mx-auto w-fit md:mx-0">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    Live Event
+                  </div>
+
+                  <h3 className="text-3xl md:text-5xl font-serif mb-2">
+                    {event.name.split(' ').map((word, idx) => 
+                      idx === event.name.split(' ').length - 1 || word === 'The' ? 
+                        <span key={idx} className="text-gradient-gold">{word} </span> : 
+                        <span key={idx}>{word} </span>
+                    )}
+                  </h3>
+
+                  <p className="text-xl md:text-2xl font-serif text-slate-600 mb-6">
+                    {event.date}
+                  </p>
+
+                  <p className="text-slate-500 mb-8 max-w-lg">
+                    {event.description}
+                  </p>
+
+                  <div className="flex flex-wrap justify-center md:justify-start gap-6 mb-8">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+                      <span className="text-xl">🎤</span>
+                      <span className="text-sm font-medium">Live Sets</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+                      <span className="text-xl">🎪</span>
+                      <span className="text-sm font-medium">TSS Booth</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full">
+                      <span className="text-xl">🔥</span>
+                      <span className="text-sm font-medium">Local Artists</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                    <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="btn-primary">
+                      <Calendar size={18} />
+                      Save the Date
+                    </a>
+                    <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="btn-outline">
+                      <Instagram size={18} />
+                      Event Details
+                    </a>
+                  </div>
+                </div>
+
+                {event.image && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="relative hidden md:block"
+                  >
+                    <div className="aspect-[3/4] max-w-xs mx-auto rounded-3xl overflow-hidden shadow-2xl">
+                      <Image
+                        src={event.image}
+                        alt={event.name}
+                        width={300}
+                        height={400}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -843,6 +986,93 @@ function Shop() {
             <p className="text-slate-400 text-sm mt-2">Join waitlist for early access</p>
           </motion.div>
         </div>
+      </div>
+    </section>
+  )
+}
+
+// =============================================
+// CONTACT / INQUIRIES
+// =============================================
+function Contact() {
+  const inquiryTypes = [
+    {
+      icon: Handshake,
+      title: 'Sponsorship',
+      desc: 'Partner with TSS and reach our engaged community',
+      color: 'green'
+    },
+    {
+      icon: UserPlus,
+      title: 'Be a Guest',
+      desc: 'Interested in being featured on the podcast?',
+      color: 'purple'
+    },
+    {
+      icon: Send,
+      title: 'Promotion',
+      desc: 'Get your music, event, or brand in front of our audience',
+      color: 'gold'
+    },
+  ]
+
+  return (
+    <section id="contact" className="py-24 bg-gradient-to-b from-transparent via-slate-50 to-transparent">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl md:text-5xl font-serif mb-4">
+            Work with <span className="text-gradient-sage">TSS</span>
+          </h2>
+          <p className="text-slate-500 max-w-lg mx-auto">
+            Interested in sponsoring, promoting, or being featured? Let&apos;s connect.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {inquiryTypes.map((type, i) => (
+            <motion.div
+              key={type.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-card p-8 text-center"
+            >
+              <div className={`icon-box icon-box-${type.color} mx-auto mb-4 w-14 h-14 rounded-2xl`}>
+                <type.icon size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-2">{type.title}</h3>
+              <p className="text-slate-500 text-sm">{type.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-card p-8 md:p-12 text-center max-w-2xl mx-auto"
+        >
+          <h3 className="text-2xl font-serif mb-4">Get in Touch</h3>
+          <p className="text-slate-500 mb-6">
+            Send us an email with your inquiry and we&apos;ll get back to you.
+          </p>
+          <a 
+            href="mailto:thesecondspliff@gmail.com?subject=TSS Inquiry" 
+            className="btn-primary inline-flex"
+          >
+            <Mail size={18} />
+            thesecondspliff@gmail.com
+          </a>
+          <p className="text-slate-400 text-sm mt-6">
+            Or DM us on <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="text-green-600 font-medium">Instagram</a>
+          </p>
+        </motion.div>
       </div>
     </section>
   )
@@ -951,7 +1181,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
-            <p className="font-cursive text-2xl italic mb-4">The Second Spliff</p>
+            <span className="font-cursive text-3xl text-white mb-4 block">The Second Spliff</span>
             <p className="text-slate-400 text-sm mb-6 max-w-sm">
               Live events, cannabis culture, and multimedia creation. 
               Podcast, events, and community.
@@ -973,6 +1203,7 @@ function Footer() {
               <a href="#artists" className="block hover:text-white transition-colors">Artists</a>
               <a href="#events" className="block hover:text-white transition-colors">Events</a>
               <a href="#shop" className="block hover:text-white transition-colors">Shop</a>
+              <a href="#contact" className="block hover:text-white transition-colors">Work With Us</a>
             </div>
           </div>
 
@@ -1038,6 +1269,7 @@ export default function Home() {
         <ArtistOfMonth />
         <Events />
         <Shop />
+        <Contact />
         <Partners />
         <CTA />
         <Footer />
