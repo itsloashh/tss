@@ -116,7 +116,9 @@ function Nav() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <a href="#" className="flex items-center">
-          <span className="font-cursive text-2xl md:text-3xl text-slate-800">The Second Spliff</span>
+          <span className="text-2xl md:text-3xl font-bold tracking-tight text-slate-800">
+            <span className="font-serif italic">TSS</span>
+          </span>
         </a>
 
         <div className="hidden md:flex items-center gap-2">
@@ -940,61 +942,160 @@ function Events() {
 }
 
 // =============================================
-// SHOP
+// SHOP — Luxury Streetwear Merch
 // =============================================
 function Shop() {
-  return (
-    <section id="shop" className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="badge badge-gold mb-6">
-              <ShoppingBag size={14} />
-              Coming Soon
-            </div>
-            <h2 className="text-4xl md:text-5xl font-serif mb-4">
-              Official <span className="text-gradient-gold">Merch</span>
-            </h2>
-            <p className="text-slate-500 mb-6">
-              The wait is almost over. We&apos;re cooking up something special — exclusive TSS merch 
-              designed for the culture. Hoodies, tees, and more dropping soon.
-            </p>
-            <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="btn-primary" style={{ background: '#fbbf24' }}>
-              <Instagram size={18} />
-              Get Notified
-            </a>
-          </motion.div>
+  const [shopEmail, setShopEmail] = useState('')
+  const [shopSigned, setShopSigned] = useState(false)
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="glass-card p-12 text-center"
-          >
+  const merchItems = [
+    { title: '???', type: '???' },
+    { title: '???', type: '???' },
+    { title: '???', type: '???' },
+  ]
+
+  return (
+    <section id="shop" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #080808 0%, #0d0d0d 40%, #0a0a0a 100%)' }}>
+      {/* Subtle top glow for depth */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[350px] rounded-full blur-3xl pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(74, 222, 128, 0.06) 0%, transparent 70%)' }} />
+      {/* Soft bottom accent */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full blur-3xl pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(251, 191, 36, 0.04) 0%, transparent 70%)' }} />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="text-xs font-semibold tracking-[0.3em] text-green-400 mb-4 uppercase">Official Collection Coming Soon</p>
+          <h2 className="text-4xl md:text-5xl font-serif text-white mb-4">
+            Official <span className="text-gradient-gold">Merch</span>
+          </h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            The wait is almost over. We&apos;re cooking up something special — exclusive TSS merch 
+            designed for the culture. Quality fabrics, clean design, authentic energy. Not hype — heritage.
+          </p>
+        </motion.div>
+
+        {/* 3 Coming Soon Merch Placeholders */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-14">
+          {merchItems.map((item, i) => (
             <motion.div
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="text-8xl mb-4"
+              key={item.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group relative rounded-2xl overflow-hidden border border-white/5 hover:border-green-500/30 transition-all"
+              style={{ background: 'linear-gradient(180deg, #161616 0%, #0e0e0e 100%)' }}
+            >
+              <div className="aspect-[3/4] flex items-center justify-center">
+                <span className="text-8xl md:text-9xl font-black text-white/[0.04] group-hover:text-green-500/10 transition-colors select-none">?</span>
+              </div>
+              <div className="p-5 border-t border-white/5">
+                <span className="text-[10px] tracking-[0.2em] text-green-400 font-semibold uppercase">{item.type}</span>
+                <h3 className="font-bold text-white mt-1 mb-2">{item.title}</h3>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-slate-500 tracking-wider uppercase">Coming Soon</span>
+                  <span className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-500 group-hover:bg-green-500/10 group-hover:text-green-400 transition-all">
+                    <ArrowRight size={14} />
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Cart animation + Notify */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-3 mb-6">
+            <motion.span
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-5xl"
             >
               🛒
-            </motion.div>
-            <p className="text-2xl font-serif text-gradient-gold">Shop Loading...</p>
-            <p className="text-slate-400 text-sm mt-2">Join waitlist for early access</p>
-          </motion.div>
-        </div>
+            </motion.span>
+            <p className="text-xl font-serif text-gradient-gold">Shop Loading...</p>
+          </div>
+          <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
+            {!shopSigned ? (
+              <>
+                <div className="flex w-full gap-2">
+                  <input
+                    type="email"
+                    value={shopEmail}
+                    onChange={(e) => setShopEmail(e.target.value)}
+                    placeholder="Enter your email for early access"
+                    className="flex-1 px-5 py-3 rounded-full bg-white/10 border border-white/10 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-green-400/50 focus:ring-1 focus:ring-green-400/30"
+                  />
+                  <button
+                    onClick={() => {
+                      if (!shopEmail) return
+                      const webhook = process.env.NEXT_PUBLIC_N8N_SHOP_WEBHOOK || ''
+                      if (webhook) {
+                        fetch(webhook, {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ email: shopEmail, type: 'merch_waitlist', timestamp: new Date().toISOString() }),
+                        }).catch(console.error)
+                      }
+                      setShopSigned(true)
+                      setShopEmail('')
+                    }}
+                    className="px-6 py-3 rounded-full bg-white text-black font-bold text-sm hover:bg-slate-100 transition-colors whitespace-nowrap"
+                  >
+                    Get Notified
+                  </button>
+                </div>
+                <p className="text-xs text-slate-600">Join the waitlist — be first to shop when we drop</p>
+              </>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center"
+              >
+                <p className="text-green-400 font-semibold">You&apos;re on the list! 🔥</p>
+                <p className="text-xs text-slate-500 mt-1">We&apos;ll hit you up when the shop goes live.</p>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 // =============================================
-// CONTACT / INQUIRIES
+// CONTACT / INQUIRIES — Enhanced Email Form
 // =============================================
 function Contact() {
+  const [emailSubject, setEmailSubject] = useState('')
+  const [customSubject, setCustomSubject] = useState('')
+  const [emailName, setEmailName] = useState('')
+  const [emailAddr, setEmailAddr] = useState('')
+  const [emailMsg, setEmailMsg] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
+
+  const subjects = [
+    'Podcast Inquiry',
+    'Partnership',
+    'Sponsorship',
+    'Be a Guest',
+    'Event Booking',
+    'Promotion',
+    'Merch Inquiry',
+    'Custom',
+  ]
+
   const inquiryTypes = [
     {
       icon: Handshake,
@@ -1015,6 +1116,38 @@ function Contact() {
       color: 'gold'
     },
   ]
+
+  const handleSubmit = async () => {
+    const subj = emailSubject === 'Custom' ? customSubject : emailSubject
+    if (!subj || !emailName || !emailAddr || !emailMsg) return
+    setSending(true)
+
+    const webhook = process.env.NEXT_PUBLIC_N8N_CONTACT_WEBHOOK || ''
+    if (webhook) {
+      try {
+        await fetch(webhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: emailName, email: emailAddr, subject: subj, message: emailMsg, timestamp: new Date().toISOString() }),
+        })
+        setSending(false)
+        setSent(true)
+      } catch (e) {
+        console.error(e)
+        setSending(false)
+        // Fallback to mailto
+        window.location.href = `mailto:thesecondspliff@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(`Name: ${emailName}\nEmail: ${emailAddr}\n\n${emailMsg}`)}`
+      }
+    } else {
+      window.location.href = `mailto:thesecondspliff@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(`Name: ${emailName}\nEmail: ${emailAddr}\n\n${emailMsg}`)}`
+      setSending(false)
+      setSent(true)
+    }
+    setEmailName(''); setEmailAddr(''); setEmailMsg(''); setEmailSubject(''); setCustomSubject('')
+    setTimeout(() => setSent(false), 4000)
+  }
+
+  const formValid = emailSubject && emailName && emailAddr && emailMsg && (emailSubject !== 'Custom' || customSubject)
 
   return (
     <section id="contact" className="py-24 bg-gradient-to-b from-transparent via-slate-50 to-transparent">
@@ -1052,26 +1185,106 @@ function Contact() {
           ))}
         </div>
 
+        {/* Enhanced Email Form with Dropdown */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card p-8 md:p-12 text-center max-w-2xl mx-auto"
+          className="glass-card p-8 md:p-12 max-w-2xl mx-auto"
         >
-          <h3 className="text-2xl font-serif mb-4">Get in Touch</h3>
-          <p className="text-slate-500 mb-6">
-            Send us an email with your inquiry and we&apos;ll get back to you.
+          <h3 className="text-2xl font-serif mb-2 text-center">Get in Touch</h3>
+          <p className="text-slate-500 text-center mb-8 text-sm">
+            Choose a subject and send us your inquiry. We&apos;ll get back to you.
           </p>
-          <a 
-            href="mailto:thesecondspliff@gmail.com?subject=TSS Inquiry" 
-            className="btn-primary inline-flex"
-          >
-            <Mail size={18} />
-            thesecondspliff@gmail.com
-          </a>
-          <p className="text-slate-400 text-sm mt-6">
-            Or DM us on <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="text-green-600 font-medium">Instagram</a>
-          </p>
+
+          {sent ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-8"
+            >
+              <span className="text-5xl mb-4 block">✅</span>
+              <p className="font-bold text-xl font-serif">Message Sent!</p>
+              <p className="text-slate-500 text-sm mt-2">We&apos;ll get back to you soon.</p>
+            </motion.div>
+          ) : (
+            <div className="space-y-4">
+              {/* Subject Dropdown */}
+              <div>
+                <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Subject *</label>
+                <select
+                  value={emailSubject}
+                  onChange={(e) => setEmailSubject(e.target.value)}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400 appearance-none cursor-pointer"
+                  style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2394a3b8' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")", backgroundRepeat: 'no-repeat', backgroundPosition: 'right 14px center' }}
+                >
+                  <option value="">Select a subject...</option>
+                  {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+
+              {emailSubject === 'Custom' && (
+                <div>
+                  <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Custom Subject *</label>
+                  <input
+                    type="text"
+                    value={customSubject}
+                    onChange={(e) => setCustomSubject(e.target.value)}
+                    placeholder="Enter your subject"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400"
+                  />
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Name *</label>
+                  <input
+                    type="text"
+                    value={emailName}
+                    onChange={(e) => setEmailName(e.target.value)}
+                    placeholder="Your name"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Email *</label>
+                  <input
+                    type="email"
+                    value={emailAddr}
+                    onChange={(e) => setEmailAddr(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-semibold text-slate-500 mb-1.5 block uppercase tracking-wider">Message *</label>
+                <textarea
+                  value={emailMsg}
+                  onChange={(e) => setEmailMsg(e.target.value)}
+                  placeholder="Tell us what's on your mind..."
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-400/50 focus:border-green-400 resize-none"
+                />
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                disabled={sending || !formValid}
+                className="w-full btn-primary justify-center !rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Mail size={18} />
+                {sending ? 'Sending...' : 'Send Message'}
+              </button>
+
+              <p className="text-center text-slate-400 text-sm">
+                Or email directly at <a href="mailto:thesecondspliff@gmail.com" className="text-green-600 font-medium">thesecondspliff@gmail.com</a>
+                {' '}• DM on <a href="https://www.instagram.com/thesecondspliff" target="_blank" className="text-green-600 font-medium">Instagram</a>
+              </p>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
@@ -1086,7 +1299,7 @@ function Partners() {
     { name: 'Skate Smoke', url: 'https://www.instagram.com/skatesmokeco', color: '#4ade80' },
     { name: 'Squadafum', url: 'https://www.instagram.com/squadafum.ca/', color: '#a855f7' },
     { name: 'BioSteel', url: 'https://www.instagram.com/biosteelsports/', note: 'Code: thesecondspliff 20% OFF', color: '#fbbf24' },
-    { name: 'Bong Pong', url: 'https://www.instagram.com/bongpongofficial/', color: '#4ade80' },
+    { name: 'Bong Pong', url: 'https://www.instagram.com/bongpongofficial/', note: 'Code: spliff 10% OFF', color: '#4ade80' },
     { name: 'King Palm', url: 'https://www.instagram.com/kingpalm/', color: '#22c55e' },
   ]
 
@@ -1181,7 +1394,9 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
-            <span className="font-cursive text-3xl text-white mb-4 block">The Second Spliff</span>
+            <span className="text-3xl font-bold tracking-tight text-white mb-4 block">
+              <span className="font-serif italic">TSS</span>
+            </span>
             <p className="text-slate-400 text-sm mb-6 max-w-sm">
               Live events, cannabis culture, and multimedia creation. 
               Podcast, events, and community.
@@ -1222,7 +1437,10 @@ function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <p>© 2026 The Second Spliff. All rights reserved.</p>
-          <p>Made with 💚 in Windsor</p>
+          <a href="https://loparo.ca" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-600 hover:text-green-400 transition-colors group">
+            Made by <span className="font-semibold text-slate-500 group-hover:text-green-400 transition-colors">Loparo</span>
+            <ArrowUpRight size={12} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+          </a>
         </div>
       </div>
     </footer>
